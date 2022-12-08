@@ -56,16 +56,88 @@ function Pokemon1() {
 					return infor.stats[5].base_stat;
 				case "description":
 					return species.flavor_text_entries[0].flavor_text.replace("\f", " ");
-				case "color":
-					// return { backgroundColor: species.color.name };
-					style.backgroundColor = species.color.name;
-					break;
 				case "type":
-					return (
-						infor.types[0].type.name.charAt(0).toUpperCase() +
-						infor.types[0].type.name.slice(1)
-					);
-				// infor.types[0].type.name.splice(1)
+					const type = [];
+					let color;
+					let textColor = "white";
+					for (let i = 0; i < infor.types.length; i++) {
+						textColor = "white";
+						switch (infor.types[i].type.name) {
+							case "normal":
+								color = "#FFFFFF";
+								textColor = "black";
+								break;
+							case "fire":
+								color = "#A52A2A";
+								break;
+							case "water":
+								color = "#00008B    ";
+								break;
+							case "grass":
+								color = "#006400";
+								break;
+							case "flying":
+								color = "#D5E6F7";
+								textColor = "black";
+								break;
+							case "fighting":
+								color = "#DC143C";
+								break;
+							case "poison":
+								color = "DarkMagenta";
+								break;
+							case "electric":
+								color = "#FFD700";
+								break;
+							case "ground":
+								color = "#8B4513";
+								break;
+							case "rock":
+								color = "#708090";
+								break;
+							case "psychic":
+								color = "#800080";
+								break;
+							case "ice":
+								color = "#ABCDEF";
+								textColor = "black";
+								break;
+							case "bug":
+								color = "#3CB371";
+								break;
+							case "ghost":
+								color = "#F8F8FF";
+								textColor = "black";
+								break;
+							case "steel":
+								color = "#A9A9A9";
+								break;
+							case "dragon":
+								color = "#B22222";
+								break;
+							case "dark":
+								color = "#23282D";
+								break;
+							case "fairy":
+								color = "#ffd5bd";
+								textColor = "black";
+								break;
+						}
+
+						const typeDetail = {
+							type:
+								infor.types[i].type.name.charAt(0).toUpperCase() +
+								infor.types[i].type.name.slice(1),
+							color: { backgroundColor: color, color: textColor },
+						};
+						type.push(typeDetail);
+					}
+					const types = type.map((item, index) => (
+						<button className="btn" key={index} style={item.color}>
+							{item.type}
+						</button>
+					));
+					return types;
 				default:
 					return "";
 			}
@@ -87,92 +159,33 @@ function Pokemon1() {
 	}
 	return (
 		<>
-			{/* <Button
-				onClick={() => {
-					if (pokeId >= 1) {
-						setPokeId(pokeId - 1);
-						console.log(pokeId);
-					}
-				}}
-			>
-				Back
-			</Button>
-			<Card
-				style={{
-					width: "18rem",
-					margin: "auto",
-					backgroundColor: "transparent",
-				}}
-			>
-				<Card.Img variant="top" src={src} />
-				<Card.Body>
-					<Card.Title style={{ textAlign: "center" }}>
-						{getInfor("name")}
-					</Card.Title>
-					<Row>
-						<Col>
-							<Card.Text>HP: {getInfor("hp")}</Card.Text>
-						</Col>
-						<Col>
-							<Card.Text>Attack: {getInfor("attack")}</Card.Text>
-						</Col>
-					</Row>
-					<Row>
-						<Col>
-							<Card.Text>Defence: {getInfor("defence")}</Card.Text>
-						</Col>
-						<Col>
-							<Card.Text>Speed: {getInfor("speed")}</Card.Text>
-						</Col>
-					</Row>
-					<Row>
-						<Col>
-							<Card.Text>
-								Special Attack: {getInfor("special-attack")}
-							</Card.Text>
-						</Col>
-					</Row>
-					<Row>
-						<Col>
-							<Card.Text>
-								Special Defence: {getInfor("special-defence")}
-							</Card.Text>
-						</Col>
-					</Row>
-					<Card.Text>{getInfor("description")}</Card.Text>
-					<Row>
-						<Col>
-							<Button onClick={() => devol()}>Devolution</Button>
-						</Col>
-						<Col>
-							<Button onClick={() => evol()}>Evolution</Button>
-						</Col>
-					</Row>
-				</Card.Body>
-			</Card>
-			<Button
-				onClick={() => {
-					setPokeId(pokeId + 1);
-				}}
-			>
-				Next
-			</Button> */}
 			<div id="backgroundbody"></div>
 			<div id="wrapAll" className="h-100 p-3 container-fluid text-dark">
 				<div id="wrapNap" className="row d-flex justify-content-between">
 					<button
-						className="nap col-3 box m-3 text-white"
+						className="nap col-2 box m-3 text-white"
 						onClick={() => {
 							setPokeId(pokeId - 1);
 						}}
 					>
 						<h3>Previous Pokemon</h3>
 					</button>
-					<button className="col-3 box m-3 text-white">
-						<h3>Detail</h3>
+					<button className="col-2 box m-3 text-white" onClick={() => devol()}>
+						<h3>Devolution</h3>
 					</button>
 					<button
-						className="nap col-3 box m-3 text-white"
+						className="nap col-2 box m-3 text-white"
+						onClick={() => {
+							setPokeId(Math.floor(Math.random() * 950) + 1);
+						}}
+					>
+						<h3>Random</h3>
+					</button>
+					<button className="col-2 box m-3 text-white" onClick={() => evol()}>
+						<h3>Evolution</h3>
+					</button>
+					<button
+						className="nap col-2 box m-3 text-white"
 						onClick={() => {
 							setPokeId(pokeId + 1);
 						}}
@@ -202,12 +215,7 @@ function Pokemon1() {
 							</div>
 							<div className="card-footer">
 								<div className="card-content generation d-flex justify-content-between">
-									<button className="btn" style={style}>
-										{getInfor("type")}
-									</button>
-									<button className="btn btn-secondary">
-										{getInfor("color")}
-									</button>
+									{getInfor("type")}
 								</div>
 								<div className="card-content d-flex justify-content-between my-2 flex-wrap">
 									<div className="content_child">
