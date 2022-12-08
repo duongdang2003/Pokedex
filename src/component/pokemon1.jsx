@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Button, Card, Row, Col } from "react-bootstrap";
+import { Button, Card, Row, Col, Spinner } from "react-bootstrap";
 import "../getAPI.js";
 import { getPokemon, getEvolution, getSpecies } from "../getAPI.js";
 import background from "../images/background.jpg";
@@ -11,6 +11,11 @@ function Pokemon1() {
 	const [species, setSpices] = useState();
 	const [pokeId, setPokeId] = useState(25);
 	const [evolution, setEvolution] = useState();
+
+	const style = {
+		backgroundColor: "blue",
+	};
+
 	useEffect(() => {
 		getPokemon(pokeId).then((data) => {
 			setSrc(data.sprites["front_default"]);
@@ -51,6 +56,16 @@ function Pokemon1() {
 					return infor.stats[5].base_stat;
 				case "description":
 					return species.flavor_text_entries[0].flavor_text.replace("\f", " ");
+				case "color":
+					// return { backgroundColor: species.color.name };
+					style.backgroundColor = species.color.name;
+					break;
+				case "type":
+					return (
+						infor.types[0].type.name.charAt(0).toUpperCase() +
+						infor.types[0].type.name.slice(1)
+					);
+				// infor.types[0].type.name.splice(1)
 				default:
 					return "";
 			}
@@ -187,8 +202,12 @@ function Pokemon1() {
 							</div>
 							<div className="card-footer">
 								<div className="card-content generation d-flex justify-content-between">
-									<button className="btn btn-primary">Electronic</button>
-									<button className="btn btn-secondary">Water</button>
+									<button className="btn" style={style}>
+										{getInfor("type")}
+									</button>
+									<button className="btn btn-secondary">
+										{getInfor("color")}
+									</button>
 								</div>
 								<div className="card-content d-flex justify-content-between my-2 flex-wrap">
 									<div className="content_child">
@@ -200,12 +219,16 @@ function Pokemon1() {
 										<p>{getInfor("defence")}</p>
 									</div>
 									<div className="content_child">
-										<h5>Skill</h5>
-										<span>đấm</span>-<span>sủa</span>
-									</div>
-									<div className="content_child">
 										<h5>Tiến Hóa</h5>
 										<span>dragon</span>
+									</div>
+									<div className="content_child">
+										<h5>Specical Attack</h5>
+										<p>{getInfor("special-attack")}</p>
+									</div>
+									<div className="content_child">
+										<h5>Specical Defence</h5>
+										<p>{getInfor("special-defence")}</p>
 									</div>
 								</div>
 								<h5>Description</h5>
