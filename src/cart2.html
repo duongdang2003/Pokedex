@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="vi">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Card Pokemon</title>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+			crossorigin="anonymous"
+		/>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+			crossorigin="anonymous"
+		></script>
+		<!-- <link rel="stylesheet" href="./style.css"> -->
+	</head>
+	<body>
+		<div id="backgroundbody"></div>
+		<div id="wrapAll" class="h-100 p-3 container-fluid text-dark">
+			<div id="wrapNap" class="row d-flex justify-content-between">
+				<button class="nap col-3 box m-3 text-white">
+					<h3>Previous Pokemon</h3>
+				</button>
+				<button class="col-3 box m-3 text-white">
+					<h3>Detail</h3>
+				</button>
+				<button class="nap col-3 box m-3 text-white">
+					<h3>Next Pokemon</h3>
+				</button>
+			</div>
+			<div class="row h-75 d-flex justify-content-center">
+				<div
+					class="p-3 text-center container_card_pokemon col-12 col-sm-8 col-md-6 col-lg-3"
+				>
+					<div class="card bg-white text-center">
+						<div class="card-header d-flex justify-content-between">
+							<div class="pokemon_name"><h3>Pikachu</h3></div>
+							<div class="pokemon_HP">
+								<span class="pokemon_HP_til" style="font-size: 60%">HP</span>
+								<span class="index_HP" style="font-size: 130%">60</span>
+							</div>
+						</div>
+						<div class="card-body">
+							<div class="img_pokemon"></div>
+							<img
+								src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png?fbclid=IwAR04h82E9NR-Qx9QIbNL2eqTtMe7t3VP3gnDHsOcPWhFzSQxDVG1L-rOtHQ"
+								alt=""
+								class="main_img_pokemon"
+							/>
+						</div>
+						<div class="card-footer">
+							<div
+								class="card-content generation d-flex justify-content-between"
+							>
+								<button class="btn btn-primary">Electronic</button>
+								<button class="btn btn-secondary">Water</button>
+							</div>
+							<div
+								class="card-content d-flex justify-content-between my-2 flex-wrap"
+							>
+								<div class="content_child">
+									<h5>Sức mạnh</h5>
+									<p>chỉ số</p>
+								</div>
+								<div class="content_child">
+									<h5>Phòng thủ</h5>
+									<p>chỉ số</p>
+								</div>
+								<div class="content_child">
+									<h5>Kĩ Năng</h5>
+									<span>đấm</span>
+									-
+									<span>sủa</span>
+								</div>
+								<div class="content_child">
+									<h5>Tiến Hóa</h5>
+									<span>dragon</span>
+								</div>
+							</div>
+							<h5>Mô tả</h5>
+							<span>Pikachu là linh vật của Dương Hải Đăng</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+			box-sizing: border-box;
+			scroll-behavior: smooth;
+		}
+		html,
+		body {
+			position: relative;
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+		}
+		.card-body {
+			position: relative;
+			min-height: 250px;
+			height: 250px;
+			width: 100%;
+			overflow: hidden;
+			padding: 0 !important;
+		}
+		#wrapAll {
+			/* background-color: transparent !important; */
+		}
+		#backgroundbody {
+			height: 100%;
+			width: 100%;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: -1;
+			background: transparent url("./images/pokemon.jpg") no-repeat center
+				center;
+			background-size: 100vw 100vh;
+			filter: blur(3px);
+			opacity: 0.3;
+		}
+		.img_pokemon {
+			position: relative;
+			height: 100%;
+			width: 100%;
+			background: #ffffff
+				url("https://i.pinimg.com/originals/14/af/f7/14aff7c091abe6baf97188787087eb28.jpg")
+				no-repeat center center;
+			background-size: 100% 100%;
+			opacity: 0.8;
+			filter: brightness(0.6);
+			filter: drop-shadow(3);
+			filter: grayscale(0.5);
+			filter: hue-rotate(4);
+			filter: saturate(0.5px);
+			border-radius: 30px;
+		}
+		.main_img_pokemon {
+			position: absolute;
+			top: 0;
+			left: 50%;
+			transform: translateX(-50%);
+			height: 100%;
+		}
+		.container_card_pokemon {
+			transition: ease-in-out 0.4s;
+			border-radius: 21px;
+			/* background-color: rgba(0, 0, 0, 0.655);*/
+			/* card vip thì cmt lại */
+			filter: drop-shadow(0px 0px 5px rgba(136, 136, 136, 0.902));
+		}
+		.container_card_pokemon .card {
+		}
+		.container_card_pokemon:hover {
+			/* box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.418); */
+			/* card vip thì cmt lại */
+		}
+
+		*,
+		*::before,
+		*::after {
+			box-sizing: border-box;
+		}
+
+		html,
+		body {
+			margin: 0;
+			height: 100%;
+		}
+
+		body {
+			background-color: #1e1f23;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			/* font-family: "Anton", sans-serif; */
+		}
+		/* Butoon - Botón */
+		button {
+			border: none;
+			position: relative;
+			border-radius: 10px;
+			background-color: #1e1f23;
+			padding: 0.3em 2.9em;
+		}
+		.nap p {
+		}
+		.box {
+			cursor: pointer;
+			font-weight: bold;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		h1 {
+			float: left;
+			padding-left: 0.8rem;
+		}
+		a {
+			text-decoration: none;
+			font-size: 120% !important;
+			background: -webkit-linear-gradient(-45deg, #ff00c1, #00fff9);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			float: left;
+		}
+
+		.container_card_pokemon::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			background: linear-gradient(
+				var(--rotate),
+				/* #d0ff00 0%,
+        #ffffff 25%,
+        #f8f07f 50%,
+        #8c944a,
+        80%,
+        #71760d 100% */
+					#ff0000 0%,
+				/* for vip (LGBT)*/ #f2ff00 25%,
+				#0051ff 50%,
+				#ff00f2,
+				80%,
+				#bebebe 100%
+			);
+			width: 100%;
+			height: 100%;
+			z-index: -1;
+			border-radius: 21px;
+			transition: --rotate 9999s ease;
+		}
+		button::before,
+		button::after {
+			content: "";
+			position: absolute;
+			background: linear-gradient(
+				var(--rotate),
+				/* #d0ff00 0%,
+        #ffffff 25%,
+        #f8f07f 50%,
+        #8c944a,
+        80%,
+        #71760d 100% */
+					#ff0000 0%,
+				/* for vip (LGBT)*/ #f2ff00 25%,
+				#0051ff 50%,
+				#ff00f2,
+				80%,
+				#ffffff 100%
+			);
+			width: 105%;
+			height: 110%;
+			left: -2.5%;
+			top: -5%;
+			z-index: -1;
+			border-radius: 10px;
+			transition: --rotate 9999s linear;
+		}
+		a:hover {
+			color: white;
+		}
+
+		/* Animation */
+		button:before,
+		button::after,
+		.container_card_pokemon::before {
+			--rotate: 3600deg;
+			transition: --rotate 10s linear;
+			animation: spin 7s infinite;
+		}
+		button:hover::before {
+			animation: fade 1.2s infinite;
+		}
+		.container_card_pokemon:hover::before {
+			animation: fade 1.2s;
+		}
+		/* Animattion - Animación */
+		@property --rotate {
+			syntax: "<angle>";
+			initial-value: 130deg;
+			inherits: false;
+		}
+		@keyframes spin {
+			0% {
+				--rotate: 0deg;
+			}
+			100% {
+				--rotate: 360deg;
+			}
+		}
+		@keyframes fade {
+			0% {
+				opacity: 1;
+				transform: scale(1);
+				filter: blur(10px);
+			}
+			100% {
+				opacity: 0;
+				transform: scale(1.4);
+				filter: blur(10px);
+			}
+		}
+	</style>
+</html>
