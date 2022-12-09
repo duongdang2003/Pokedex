@@ -9,12 +9,13 @@ function Pokemon1() {
 	const [name, setName] = useState();
 	const [infor, setInfor] = useState();
 	const [species, setSpices] = useState();
-	const [pokeId, setPokeId] = useState(25);
+	const [pokeId, setPokeId] = useState(484);
 	const [evolution, setEvolution] = useState();
+	const [legendary, setLegendary] = useState(
+		"p-3 text-center col-12 col-sm-8 col-md-6 col-lg-3 container_card_pokemon"
+	);
 
-	const style = {
-		backgroundColor: "blue",
-	};
+	const before = {};
 
 	useEffect(() => {
 		getPokemon(pokeId).then((data) => {
@@ -26,6 +27,17 @@ function Pokemon1() {
 		});
 		getSpecies(pokeId).then((data) => {
 			setSpices(data);
+			if (data.is_legendary) {
+				setLegendary(
+					"p-3 text-center col-12 col-sm-8 col-md-6 col-lg-3 container_card_pokemonLegendary"
+				);
+				console.log("set true");
+			} else {
+				setLegendary(
+					"p-3 text-center col-12 col-sm-8 col-md-6 col-lg-3 container_card_pokemon"
+				);
+				console.log("set false");
+			}
 			console.log("species");
 			console.log(data);
 			console.log("-------------------------------");
@@ -133,7 +145,7 @@ function Pokemon1() {
 						type.push(typeDetail);
 					}
 					const types = type.map((item, index) => (
-						<button className="btn" key={index} style={item.color}>
+						<button className="btn m-1" key={index} style={item.color}>
 							{item.type}
 						</button>
 					));
@@ -194,18 +206,18 @@ function Pokemon1() {
 					</button>
 				</div>
 				<div className="row h-75 d-flex justify-content-center">
-					<div className="p-3 text-center container_card_pokemon col-12 col-sm-8 col-md-6 col-lg-3">
+					<div className={legendary}>
 						<div className="card bg-white text-center">
 							<div className="card-header d-flex justify-content-between">
 								<div className="pokemon_name">
 									<h3>{getInfor("name")}</h3>
 								</div>
 								<div className="pokemon_HP">
-									<span className="pokemon_HP_til" style={{ fontSize: "60%" }}>
+									<span className="pokemon_HP_til" style={{ fontSize: "75%" }}>
 										HP
 									</span>
 									<span className="index_HP" style={{ fontSize: "130%" }}>
-										{getInfor("hp")}
+										{" " + getInfor("hp")}
 									</span>
 								</div>
 							</div>
@@ -214,7 +226,7 @@ function Pokemon1() {
 								<img src={src} alt="" className="main_img_pokemon" />
 							</div>
 							<div className="card-footer">
-								<div className="card-content generation d-flex justify-content-between">
+								<div className="card-content generation d-flex ">
 									{getInfor("type")}
 								</div>
 								<div className="card-content d-flex justify-content-between my-2 flex-wrap">
@@ -227,8 +239,8 @@ function Pokemon1() {
 										<p>{getInfor("defence")}</p>
 									</div>
 									<div className="content_child">
-										<h5>Tiến Hóa</h5>
-										<span>dragon</span>
+										<h5>Speed</h5>
+										<span>{getInfor("speed")}</span>
 									</div>
 									<div className="content_child">
 										<h5>Specical Attack</h5>
